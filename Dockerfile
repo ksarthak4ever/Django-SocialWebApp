@@ -13,10 +13,10 @@ COPY ./requirements.txt /requirements.txt
 # Encountered a WARNING after building. Need to add this line before postgresql
 RUN apk update
 # Add dependencies so we can install the psycopg2 package for Django/Postgres
-RUN apk add --update --no-cache postgresql-client jpeg-dev
+RUN apk add --update --no-cache postgresql-client jpeg-dev libffi
 # Add temp packages needed to install requirements. Assigning alias
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
-  gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
+  libressl-dev musl-dev libffi-dev gcc libc-dev linux-headers postgresql-dev musl-dev zlib zlib-dev
 # -- Installs our requirements into the Docker image
 RUN pip install -r /requirements.txt
 # Delete the temporary dependencies we just added

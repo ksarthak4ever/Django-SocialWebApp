@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # App imports.
+    # Third Party
+    'social_django',
+
+    # Local apps
     "core",
     "accounts"
 ]
@@ -66,6 +69,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # social auth context proecessors
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -128,3 +134,15 @@ STATIC_URL = '/static/'
 
 # Setting up custom user model.
 AUTH_USER_MODEL = 'accounts.User'
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+# Auth backends for Github,Linkedin and Twitter.
+AUTHENTICATION_BACKENDS = [
+ 
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+
+    'django.contrib.auth.backends.ModelBackend', 
+]
