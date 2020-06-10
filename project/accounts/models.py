@@ -26,6 +26,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         """
         Returns a string representation of this `User`
-        setting name here as number can be confusing.
         """
         return self.name
+
+    def get_absolute_url(self):
+        return "/user/%i/" % (self.pk)
