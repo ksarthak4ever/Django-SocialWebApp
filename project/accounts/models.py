@@ -31,3 +31,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_absolute_url(self):
         return "/user/%i/" % (self.pk)
+
+    def set_password(self, password):
+        """
+        Should set password field. 
+        Would not save the instance, though.
+        """
+
+        self.password = password
+        return
